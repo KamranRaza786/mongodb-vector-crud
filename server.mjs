@@ -17,7 +17,8 @@ const openai = new OpenAI({
 
 import './config/index.mjs'
 
-const mongodbURI = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.CLUSTER_NAME}/${process.env.DATABASE_NAME}?retryWrites=true&w=majority`
+const mongodbURI = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}
+@${process.env.CLUSTER_NAME}/${process.env.DATABASE_NAME}?retryWrites=true&w=majority`
 const client = new MongoClient(mongodbURI);
 const database = client.db('socialstories');
 const postCollection = database.collection('posts');
