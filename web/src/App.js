@@ -3,7 +3,7 @@ import axios from "axios";
 // import logo from "./logo.svg";
 import "./App.css";
 
-// const baseUrl = 'http://localhost:5001';
+const baseUrl = 'http://localhost:5001';
 
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
   const getAllStories = async () => {
     try {
       setIsLoading(true);
-      const resp = await axios.get(`/api/v1/stories`)
+      const resp = await axios.get(`${baseUrl}/api/v1/stories`)
       console.log(resp.data);
       setData(resp.data);
 
@@ -49,7 +49,7 @@ function App() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const resp = await axios.get(`/api/v1/search?q=${searchInputRef.current.value}`)
+      const resp = await axios.get(`${baseUrl}/api/v1/search?q=${searchInputRef.current.value}`)
       console.log(resp.data);
       setData(resp.data);
 
@@ -67,7 +67,7 @@ function App() {
     try {
       setIsLoading(true);
 
-      const response = await axios.post(`/api/v1/story`, {
+      const response = await axios.post(`${baseUrl}/api/v1/story`, {
         title: titleInputRef.current.value,
         body: bodyInputRef.current.value,
       });
@@ -87,7 +87,7 @@ function App() {
     try {
       setIsLoading(true);
 
-      const response = await axios.delete(`/api/v1/story/${id}`);
+      const response = await axios.delete(`${baseUrl}/api/v1/story/${id}`);
       console.log("response: ", response.data);
 
       setIsLoading(false);
@@ -103,7 +103,7 @@ function App() {
     try {
       setIsLoading(true);
 
-      const response = await axios.put(`/api/v1/story/${id}`, {
+      const response = await axios.put(`${baseUrl}/api/v1/story/${id}`, {
         title: e.target.titleInput.value,
         body: e.target.bodyInput.value,
       });
@@ -120,8 +120,8 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1>Creative Social Stories</h1>
+    <div>
+      <h1>Social Stories</h1>
 
       <form onSubmit={postStory}>
         <label htmlFor="titleInput">Title: </label>
@@ -175,17 +175,17 @@ function App() {
 
       {
         data.map((eachStory, index) => (
-          <div key={eachStory?.id} className="storyCard">
+          <div key={eachStory?._id} className="storyCard">
 
             {
               (eachStory.isEdit) ?
                 (<form onSubmit={(e) => {
-                  updateStory(e, eachStory?.id)
+                  updateStory(e, eachStory?._id)
                 }}>
                   <label htmlFor="titleInput">Title: </label>
                   <br />
                   <input
-                    defaultValue={eachStory?.metadata?.title}
+                    defaultValue={eachStory?.title}
                     name="titleInput"
                     type="text"
                     id="titleInput"
@@ -197,7 +197,7 @@ function App() {
                   <label htmlFor="bodyInput">what is in your mind: </label>
                   <br />
                   <textarea
-                    defaultValue={eachStory?.metadata?.body}
+                    defaultValue={eachStory?.body}
                     name="bodyInput"
                     type="text"
                     id="bodyInput"
@@ -217,10 +217,10 @@ function App() {
 
                 :
                 (<div>
-                  <h3>{eachStory?.metadata?.title}</h3>
-                  <p>{eachStory?.metadata?.body}</p>
+                  <h3>{eachStory?.title}</h3>
+                  <p>{eachStory?.body}</p>
                   <button onClick={() => {
-                    deleteHandler(eachStory?.id)
+                    deleteHandler(eachStory?._id)
                   }}>Delete</button>
                   <button onClick={() => {
 
