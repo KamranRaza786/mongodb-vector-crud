@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import cors from 'cors'
 import path from 'path';
 const __dirname = path.resolve();
-import { PineconeClient } from "@pinecone-database/pinecone";
+//import { PineconeClient } from "@pinecone-database/pinecone";
 import OpenAI from "openai";
 import "dotenv/config.js";
 
@@ -36,11 +36,11 @@ async function run() {
 run().catch(console.dir);
 
 
-const pinecone = new PineconeClient();
-await pinecone.init({
-  environment: process.env.PINECONE_ENVIRONMENT,
-  apiKey: process.env.PINECONE_API_KEY,
-});
+//const pinecone = new PineconeClient();
+//await pinecone.init({
+ // environment: process.env.PINECONE_ENVIRONMENT,
+ // apiKey: process.env.PINECONE_API_KEY,
+//});
 
 
 
