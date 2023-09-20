@@ -45,7 +45,7 @@ await pinecone.init({
 
 const app = express();
 app.use(express.json());
-app.use(cors(["http://localhost:3000", "127.0.0.1", "https://ewrer234234.appspot.app.com"]));
+app.use(cors([]));
 
 app.use(morgan('combined'));
 
