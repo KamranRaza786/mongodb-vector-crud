@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import cors from 'cors'
 import path from 'path';
 const __dirname = path.resolve();
-import { PineconeClient } from "@pinecone-database/pinecone";
+// import { PineconeClient } from "@pinecone-database/pinecone";
 import OpenAI from "openai";
 import "dotenv/config.js";
 
